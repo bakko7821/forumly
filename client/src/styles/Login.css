@@ -104,11 +104,27 @@ form button {
     line-height: 1.5;
     width: 100%;
     padding: 16px;
-    margin-top: 20%;
+    margin-top: 10%;
     transition: background-color 0.3s;
 }
 
 form button:hover {
     transition: background-color 0.3s;
     background-color: #3d4043;
+}
+
+.notificationMessage {
+    position: absolute;
+    top: 10px;
+    font-size: 1.5rem;
+    gap: 8px;
+    border-radius: 40px;
+    background-color: #EEF1F3;
+    font-weight: 500;
+    padding: 16px 48px;
+    color: #000;
+}
+
+.notificationMessage img {
+    width: 64px;
 }

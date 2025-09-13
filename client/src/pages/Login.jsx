@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import googleLogo from "../assets/images/google.svg";
 import appleLogo from "../assets/images/apple.svg";
+import doneSvg from "../assets/images/done-round-svgrepo-com.svg";
 import "../styles/Login.css";
 // import Register from "./pages/Register.jsx";
 
@@ -68,7 +69,10 @@ function Login() {
           Войти
         </button>
       </form>
-      {message && <p className="mt-3 text-center text-sm text-gray-700">{message}</p>}
+      {message && <div className="notificationMessage flex-center">
+              <img src={doneSvg} alt="" />
+              <p>{message}</p>
+            </div>}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Profile from "./pages/Profile.jsx";
 import Navbar from "./components/Navbar.jsx";
+import CreatePost from "./pages/CreatePost.jsx";
+import Home from "./pages/Home.jsx";
 import "./styles/App.css";
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={<h1 className="text-2xl">Главная страница 🚀</h1>} />
+          <Route path="/createPost" element={<CreatePost />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </div>

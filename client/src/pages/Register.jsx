@@ -1,5 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import googleLogo from "../assets/images/google.svg";
+import appleLogo from "../assets/images/apple.svg";
+import doneSvg from "../assets/images/done-round-svgrepo-com.svg";
+import "../styles/Login.css";
 
 function Register() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -20,9 +25,23 @@ function Register() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-80">
-      <h2 className="text-2xl font-bold mb-4">Регистрация</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+    <div className="loginBox flex-column flex-center">
+      <p className="headingText">Регистрация</p>
+      <p className="descriptionText">Продолжая использовать Reddit, вы тем самым соглашаетесь соблюдать наше <a href="#">Пользовательское соглашение</a> и подтверждаете, что ознакомились с <a href="#">Политикой конфиденциальности</a></p>
+      <button className="useAuthButton flex-center">
+        <img src={googleLogo} alt="" />
+        Вход с аккаунтом Google
+      </button>
+      <button className="useAuthButton flex-center">
+        <img src={appleLogo} alt="" />
+        Вход с аккаунтом Apple
+      </button>
+      <div className="orBox flex-center">
+        <span></span>
+        <p>ИЛИ</p>
+        <span></span>
+      </div>
+      <form onSubmit={handleSubmit} className="flex-column flex-center">
         <input
           type="text"
           name="username"
@@ -47,11 +66,17 @@ function Register() {
           onChange={handleChange}
           className="border p-2 rounded"
         />
+        <div className="linkBox flex-column">
+            <p className="registrationPageText">Уже есть аккаунт? <Link to="/login">Войти в аккаунт</Link></p>
+        </div>
         <button type="submit" className="bg-blue-600 text-white p-2 rounded">
           Зарегистрироваться
         </button>
       </form>
-      {message && <p className="mt-3 text-center text-sm text-gray-700">{message}</p>}
+      {message && <div className="notificationMessage flex-center">
+        <img src={doneSvg} alt="" />
+        <p>{message}</p>
+      </div>}
     </div>
   );
 }

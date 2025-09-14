@@ -1,0 +1,171 @@
+.homePage {
+    width: 100%;
+    height: 100%;
+    gap: 24px;
+}
+
+.cardBoxPosts {
+    width: 100%;
+    height: 10%;
+    gap: 16px;
+}
+
+.infoBox {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 16px;
+}
+
+.postsList {
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+.postsList::-webkit-scrollbar {
+  width: 4px;               /* ширина scrollbar */
+}
+
+.postsList::-webkit-scrollbar-track {
+  background: transparent;        /* цвет дорожки */
+}
+
+.postsList::-webkit-scrollbar-thumb {
+  background-color: #115BCA;    /* цвет плашки */
+  border-radius: 20px;
+}
+
+.postCard {
+    width: 100%;
+    padding: 16px 8px;
+    border-top: 2px #EEF1F3 solid;
+    border-bottom: 2px #EEF1F3 solid;
+    gap: 16px;
+}
+
+.postCard .postHeadingInfo {
+    width: 100%;
+    align-items: center;
+}
+
+.postCard .postHeadingInfo .userInfo {
+    color: #818181;
+    gap: 8px;
+}
+
+.postCard .postHeadingInfo .userInfo .userAvatar {
+    width: 24px;
+    height: 24px;
+    background-color: #EEF1F3;
+    border-radius: 100%;
+}
+
+.postCard .postHeadingInfo .userInfo .userName {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.postCard .postHeadingInfo .userInfo .circle {
+    background-color: #818181;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+}
+
+.postCard .postHeadingInfo .goToPostButton {
+    background-color: #115BCA;
+    transition: background-color 0.3s;
+}
+
+.postCard .postHeadingInfo .goToPostButton:hover {
+    background-color: #6595dd;
+    transition: background-color 0.3s;
+}
+
+.postHeadingText {
+    display: -webkit-box;        /* создаём блочный контейнер */
+    -webkit-box-orient: vertical;/* направление оси */
+    -webkit-line-clamp: 2;       /* ограничиваем до 2 строк */
+    overflow: hidden;            /* скрываем лишнее */
+    text-overflow: ellipsis;  
+    font-size: 2rem;
+    color: #EEF1F3;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.postInfo {
+    display: flex;
+    justify-content: start;
+    gap: 16px;
+}
+
+.likesBox, .commentsBox, .starButton, .shareButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    padding: 8px;
+    gap: 8px;
+    background-color: #2A3236;
+    color: #fff ;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.usersBox {
+    padding: 24px 16px;
+    gap: 16px;
+    background-color: #2A3236;
+    border-radius: 16px;
+    white-space: nowrap;
+}
+
+.usersBox p {
+    width: 100%;
+    color: #EEF1F3;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.usersList {
+    width: 100%;
+    gap: 8px;
+}
+
+.usersList .userCard {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.usersList .userCard .userAvatar {
+    width: 50px;
+    height: 50px;
+    background-color: #EEF1F3;
+    border-radius: 100%;
+}
+
+.usersList .userCard .userInfo .userName{
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #EEF1F3;
+}
+
+.usersList .userCard .userInfo .userFollowersCount{
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #818181;
+}

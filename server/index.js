@@ -28,5 +28,9 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 import authRoutes from "./routes/auth.js";
+import postRoutes from "./routes/posts.js";
+import usersRoutes from "./routes/users.js";
 
+app.use("/users", usersRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/posts", postRoutes);

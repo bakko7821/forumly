@@ -26,8 +26,8 @@ function CreatePost() {
   };
 
   return (
-    <div className="createPostPage">
-      <h2>Создать пост</h2>
+    <div className="createPostPage flex-center flex-column">
+      <p>Создать пост</p>
       <form onSubmit={handleSubmit} className="flex-column">
         <input
           type="text"

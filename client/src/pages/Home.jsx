@@ -35,7 +35,7 @@ function Home() {
 
       </div>
       <div className="infoBox">
-        <div className="postsList flex-center flex-column">
+        <div className="postsList flex-column">
           {posts.map((post) => (
             <div key={post._id} className="postCard flex-column">
               <div className="postHeadingInfo flex-between">

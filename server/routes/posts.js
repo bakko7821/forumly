@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Post from "../models/Post.js";
 import authMiddleware from "../middleware/authMiddleware.js"; // JWT проверка
 
@@ -32,5 +33,30 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Ошибка при получении постов" });
   }
 });
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID пользователя" });
+    }
+
+    const usersPosts = await Post.find({ author: new mongoose.Types.ObjectId(id)}).select(
+      "_id title text likes comments author createdAt"
+    );
+
+    if (!usersPosts || usersPosts.length === 0) {
+      return res.status(404).json({ message: "Посты пользователя не найдены" });
+    }
+
+    res.json(usersPosts);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Ошибка при получении постов пользователя" });
+  }
+});
+
 
 export default router;

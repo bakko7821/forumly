@@ -18,4 +18,29 @@ router.get("/popular", async (req, res) => {
   }
 });
 
+
+import mongoose from "mongoose";
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID пользователя" });
+    }
+
+    const user = await User.findById(id).select(
+      "firstname lastname username email followersCount createdAt"
+    );
+
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
+
+    res.json(user);
+  } catch (error) {
+    console.error("Ошибка при получении пользователя:", error);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
+});
+
+
 export default router;

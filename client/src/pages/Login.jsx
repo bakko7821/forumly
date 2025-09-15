@@ -19,8 +19,10 @@ function Login() {
   e.preventDefault();
   try {
     const res = await axios.post("http://localhost:5000/api/auth/login", form);
+
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data.user)); // сохраним пользователя
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
     setMessage("Успешный вход!");
     window.location.href = "/"; // редирект на главную
   } catch (err) {

@@ -65,6 +65,11 @@ form {
     gap: 16px;
 }
 
+form .fullNameBox {
+    width: 100%;
+    gap: 16px;
+}
+
 form input {
     width: 100%;
     background-color: #2A3236;

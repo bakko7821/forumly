@@ -7,7 +7,12 @@ import doneSvg from "../assets/images/done-round-svgrepo-com.svg";
 import "../styles/Login.css";
 
 function Register() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
+    username: "", 
+    email: "", 
+    password: "" });
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -27,7 +32,6 @@ function Register() {
   return (
     <div className="loginBox flex-column flex-center">
       <p className="headingText">Регистрация</p>
-      <p className="descriptionText">Продолжая использовать Reddit, вы тем самым соглашаетесь соблюдать наше <a href="#">Пользовательское соглашение</a> и подтверждаете, что ознакомились с <a href="#">Политикой конфиденциальности</a></p>
       <button className="useAuthButton flex-center">
         <img src={googleLogo} alt="" />
         Вход с аккаунтом Google
@@ -42,6 +46,24 @@ function Register() {
         <span></span>
       </div>
       <form onSubmit={handleSubmit} className="flex-column flex-center">
+        <div className="fullNameBox flex-center">
+          <input
+          type="text"
+          name="firstname"
+          placeholder="Имя"
+          value={form.firstname}
+          onChange={handleChange}
+          className="border p-2 rounded"
+          />
+          <input
+          type="text"
+          name="lastname"
+          placeholder="Фамилия"
+          value={form.lastname}
+          onChange={handleChange}
+          className="border p-2 rounded"
+          />
+        </div>
         <input
           type="text"
           name="username"

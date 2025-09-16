@@ -1,0 +1,106 @@
+.postPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    gap: 24px;
+}
+
+.postPage .postContent {
+    width: 100%;
+    gap: 16px;
+}
+
+.postPage .postContent .topBox {
+    width: 100%;
+}
+
+.postPage .postContent .topBox .userInfo {
+    gap: 8px;
+}
+
+.headingText {
+    gap: 8px;
+}
+
+.headingText .userName {
+    font-size: 1rem;
+    color: #EEF1F3;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.headingText .circle {
+    width: 4px;
+    height: 4px;
+    background-color: #818181;
+    border-radius: 100%;
+}
+
+.headingText .postDate, .followersCount {
+    color: #818181;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.postPage .postContent .topBox .userInfo .userAvatar {
+    width: 48px;
+    height: 48px;
+    background-color: #EEF1F3;
+    border-radius: 100%;
+}
+
+.postPage .postContent .topBox button {
+    background-color: transparent;
+}
+
+.postBody  {
+    gap: 8px;
+}
+
+.postBody .postTitle {
+    padding: 8px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: #EEF1F3;
+    line-height: 1.3;
+}
+
+.postBody .postText {
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #EEF1F3;
+    line-height: 1.5;
+}
+
+.postComments {
+    width: 100%;
+    padding: 8px;
+    gap: 16px;
+    border-top: 2px #115BCA solid;
+}
+
+.postComments .boxName {
+    font-weight: 500;
+    color: #EEF1F3;
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+.postComments .sendCommentForm {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+} 
+
+.postComments .sendCommentForm button {
+    position: absolute;
+    right: 8px;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    /* background-color: transparent; */
+}

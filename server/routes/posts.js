@@ -58,5 +58,29 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/findpost/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID поста" });
+    }
+
+    const post = await Post.findById(id).select(
+      "_id title text likes comments author createdAt"
+    );
+
+    if (!post) {
+      return res.status(404).json({ message: "Пост не найден" });
+    }
+
+    res.json(post);
+  } catch (err) {
+    console.error("Ошибка при получении поста:", err);
+    res.status(500).json({ message: "Ошибка при получении поста" });
+  }
+});
+
+
 
 export default router;

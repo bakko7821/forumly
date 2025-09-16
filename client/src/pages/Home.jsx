@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Home.css";
 
@@ -29,6 +30,12 @@ function Home() {
       .catch(err => console.error("Ошибка при загрузке авторов:", err));
   }, []);
 
+  const navigate = useNavigate();
+
+  function goToPost(postId) {
+    navigate(`/post/${postId}`);
+  }
+
   return (
     <div className="homePage flex-ceneter flex-column">
       <div className="cardBoxPosts flex-center">
@@ -45,7 +52,7 @@ function Home() {
                   <div className="circle"></div>
                   <p className="postTime">3 часа назад</p>
                 </div>
-                <button className="goToPostButton">Вступить</button>
+                <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
               </div>
               <p className="postHeadingText">{post.title}</p>
               {/* <p>{post.text}</p> */}

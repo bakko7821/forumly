@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Profile.css";
+
+import { useNavigate } from "react-router-dom";
+
 import editSvg from "../assets/images/edit-2-svgrepo-com.svg"
 import mailSvg from "../assets/images/mail-alt-3-svgrepo-com.svg"
 import rocketSvg from "../assets/images/rocket-svgrepo-com.svg"
+import likeSvg from "../assets/images/like.svg";
+import commentSvg from "../assets/images/comment.svg";
+import starSvg from "../assets/images/star.svg";
+import shareSvg from "../assets/images/share.svg";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -72,7 +79,17 @@ function Profile() {
     // console.log(posts)
   }, []);
 
-  if (loading) return <p>Загрузка...</p>;
+  const navigate = useNavigate();
+
+  function goToPost(postId) {
+    navigate(`/post/${postId}`);
+  }
+
+  if (loading) return (
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+  );
   if (error) return <p className="text-red-600">{error}</p>;
 
   return (
@@ -105,16 +122,40 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div className="postsListBox">
+      <div className="postsListBox flex-column">
         <p className="boxName">Список постов {user.username}:</p>
-        <div className="postList">
+        <div className="postList flex-column">
           {posts && posts.length > 0 ? (
             posts.map(post => (
-              <div key={post._id} className="postItem">
-                <h3>{post.title}</h3>
-                <p>{post.text}</p>
-                <small>Дата: {new Date(post.createdAt).toLocaleDateString("ru-RU")}</small>
-                <p>Лайки: {post.likes.length}</p>
+              <div key={post._id} className="postCard flex-column">
+                <div className="postHeadingInfo flex-between">
+                  <div className="userInfo flex-center">
+                    <div className="userAvatar"></div>
+                    <p className="userName">{user.username || "Неизвестно"}</p>
+                    <div className="circle"></div>
+                    <p className="postTime">3 часа назад</p>
+                  </div>
+                  <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
+                </div>
+                <p className="postHeadingText">{post.title}</p>
+                {/* <p>{post.text}</p> */}
+                <div className="postInfo">
+                  <div className="likesBox flex-center">
+                    <img src={likeSvg} alt="" />
+                    <p>{post.likes}</p>
+                  </div>
+                  <div className="commentsBox flex-center">
+                    <img src={commentSvg} alt="" />
+                    <p>{post.comments}</p>
+                  </div>
+                  <button className="starButton">
+                    <img src={starSvg} alt="" />
+                  </button>
+                  <button className="shareButton">
+                    <img src={shareSvg} alt="" />
+                    Поделиться
+                  </button>
+                </div>
               </div>
             ))
           ) : (
@@ -128,3 +169,4 @@ function Profile() {
 }
 
 export default Profile;
+

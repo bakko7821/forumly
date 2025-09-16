@@ -5,6 +5,8 @@ import Profile from "./pages/Profile.jsx";
 import Navbar from "./components/Navbar.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
 import Home from "./pages/Home.jsx";
+import Post from "./pages/Post.jsx";
+
 import "./styles/App.css";
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
 
       <div className="mainContainer flex-center">
         <Routes>
+          <Route path="/post/:id" element={<Post />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />

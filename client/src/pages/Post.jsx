@@ -61,34 +61,42 @@ function Post() {
   }
 
   if (loading) return (
-    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    <svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle
+        className="path"
+        fill="none"
+        strokeWidth="6"
+        strokeLinecap="round"
+        cx="33"
+        cy="33"
+        r="30"
+      ></circle>
     </svg>
+
   );
   if (error) return <p className="text-red-600">{error}</p>;
 
-    function formatRenderDate(dateString) {
-        if (!dateString) return "";
+  function formatRenderDate(dateString) {
+      if (!dateString) return "";
 
-        const postDate = new Date(dateString);
-        const today = new Date();
+      const postDate = new Date(dateString);
+      const today = new Date();
 
-        // убираем время, оставляем только дату
-        const postDay = new Date(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
-        const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      // убираем время, оставляем только дату
+      const postDay = new Date(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
+      const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-        const diffInMs = todayDay - postDay;
-        const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+      const diffInMs = todayDay - postDay;
+      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-        if (diffInDays === 0) return "сегодня";
-        if (diffInDays === 1) return "вчера";
+      if (diffInDays === 0) return "сегодня";
+      if (diffInDays === 1) return "вчера";
 
-        return postDate.toLocaleDateString("ru-RU");
-    }
+      return postDate.toLocaleDateString("ru-RU");
+  }
 
-    const renderDate = formatRenderDate(post?.createdAt);
-
-
+  const renderDate = formatRenderDate(post?.createdAt);
+  
   return (
     <div className="postPage">
       <button className="backButton flex-center" onClick={backButton}>
@@ -98,7 +106,23 @@ function Post() {
       <div className="postContent flex-column">
         <div className="topBox flex-between">
           <div className="userInfo flex-center">
-            <div className="userAvatar"></div>
+            {user ? (
+              user.image && user.image.trim() !== "" ? (
+                <img
+                  className="userAvatar"
+                  src={`http://localhost:5000${user.image}`}
+                  alt="avatar"
+                />
+              ) : (
+                <div className="userAvatar flex-center">
+                  <p>{user.username.charAt(0)}</p>
+                </div>
+              )
+            ) : (
+              <div className="userAvatar flex-center">
+                <p>?</p>
+              </div>
+            )}
             <div className="userTextInfo flex-column">
               <div className="headingText flex-center">
                 <p className="userName">{user ? user.username : "Неизвестно"}</p>

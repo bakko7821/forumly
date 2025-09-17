@@ -23,6 +23,18 @@
     background-color: #EEF1F3;
 }
 
+.mainContainer .userInfoBox .userAvatar p {
+    font-size: 4rem;
+    line-height: 1.2;
+    color: #000;
+}
+
+.userAvatar p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000;
+}
+
 .mainContainer .userInfoBox .fullNameBox, .mainContainer .userInfoBox .userNameBox {
     justify-content: start;
     gap: 8px;
@@ -120,3 +132,4 @@
     transition: background-color 0.3s;
     background-color: #6595dd;
 }
+

@@ -36,6 +36,29 @@ function Home() {
     navigate(`/post/${postId}`);
   }
 
+  function goToUserButton(userId) {
+    navigate(`/profile/${userId}`);
+  }
+
+    function formatRenderDate(dateString) {
+      if (!dateString) return "";
+
+      const postDate = new Date(dateString);
+      const today = new Date();
+
+      // убираем время, оставляем только дату
+      const postDay = new Date(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
+      const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+      const diffInMs = todayDay - postDay;
+      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+      if (diffInDays === 0) return "Сегодня";
+      if (diffInDays === 1) return "Вчера";
+
+      return postDate.toLocaleDateString("ru-RU");
+  }
+
   return (
     <div className="homePage flex-ceneter flex-column">
       <div className="cardBoxPosts flex-center">
@@ -47,10 +70,26 @@ function Home() {
             <div key={post._id} className="postCard flex-column">
               <div className="postHeadingInfo flex-between">
                 <div className="userInfo flex-center">
-                  <div className="userAvatar"></div>
+                  {post.author ? (
+                    post.author.image && post.author.image.trim() !== "" ? (
+                      <img
+                        className="userAvatar"
+                        src={`http://localhost:5000${post.author.image}`}
+                        alt="avatar"
+                      />
+                    ) : (
+                      <div className="userAvatar flex-center">
+                        <p>{post.author.username.charAt(0)}</p>
+                      </div>
+                    )
+                  ) : (
+                    <div className="userAvatar flex-center">
+                      <p>?</p>
+                    </div>
+                  )}
                   <p className="userName">{post.author?.username || "Неизвестно"}</p>
                   <div className="circle"></div>
-                  <p className="postTime">3 часа назад</p>
+                  <p className="postTime">{formatRenderDate(post?.createdAt)}</p>
                 </div>
                 <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
               </div>
@@ -80,13 +119,29 @@ function Home() {
           <p>Популярные пользователи</p>
           <div className="usersList flex-column">
             {authors.map(user => (
-              <div className="userCard" key={user._id}>
-                <div className="userAvatar"></div>
+              <button onClick={() => goToUserButton(user._id)} className="userCard" key={user._id}>
+                {user ? (
+                  user.image && user.image.trim() !== "" ? (
+                    <img
+                      className="userAvatar"
+                      src={`http://localhost:5000${user.image}`}
+                      alt="avatar"
+                    />
+                  ) : (
+                    <div className="userAvatar flex-center">
+                      <p>{user.username.charAt(0)}</p>
+                    </div>
+                  )
+                ) : (
+                  <div className="userAvatar flex-center">
+                    <p>?</p>
+                  </div>
+                )}
                 <div className="userInfo flex-column">
                   <p className="userName">{user.username}</p>
                   <p className="userFollowersCount">{user.followersCount} подписчиков</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>

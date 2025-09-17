@@ -26,7 +26,7 @@ router.post("/", authMiddleware, async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate("author", "username") // можно подтянуть имя/почту автора
+      .populate("author", "username image followersCount ") // можно подтянуть имя/почту автора
       .sort({ createdAt: -1 }); // новые сверху
     res.json(posts);
   } catch (err) {
@@ -42,9 +42,7 @@ router.get("/:id", async (req, res) => {
       return res.status(400).json({ message: "Некорректный ID пользователя" });
     }
 
-    const usersPosts = await Post.find({ author: new mongoose.Types.ObjectId(id)}).select(
-      "_id title text likes comments author createdAt"
-    );
+    const usersPosts = await Post.find({ author: new mongoose.Types.ObjectId(id)});
 
     if (!usersPosts || usersPosts.length === 0) {
       return res.status(404).json({ message: "Посты пользователя не найдены" });
@@ -66,9 +64,7 @@ router.get("/findpost/:id", async (req, res) => {
       return res.status(400).json({ message: "Некорректный ID поста" });
     }
 
-    const post = await Post.findById(id).select(
-      "_id title text likes comments author createdAt"
-    );
+    const post = await Post.findById(id);
 
     if (!post) {
       return res.status(404).json({ message: "Пост не найден" });

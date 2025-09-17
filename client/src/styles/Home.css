@@ -151,10 +151,19 @@
 }
 
 .usersList .userCard .userAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
     background-color: #EEF1F3;
     border-radius: 100%;
+}
+
+.usersList .userCard .userInfo {
+    text-align: start;
+    align-items: start;
+    justify-content: start;
 }
 
 .usersList .userCard .userInfo .userName{
@@ -169,4 +178,8 @@
     font-size: 1rem;
     line-height: 1.5;
     color: #818181;
+}
+
+.usersList .userCard .userAvatar p {
+    color: #000;
 }

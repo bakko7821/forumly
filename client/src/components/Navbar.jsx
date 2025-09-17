@@ -23,7 +23,7 @@ function Navbar() {
     setIsAuth(false);
     navigate("/login");
   };
-
+  
   return (
     <nav className="navBox flex-between">
       <Link to="/" className="mainLogo flex-center">
@@ -87,7 +87,7 @@ function Navbar() {
             <Link to="/createPost" className="profileLink flex-center">
               <img src={addPostIconSvg} alt="" />
             </Link>
-            <Link to="/profile" className="profileLink flex-center">
+            <Link to={`/profile/${JSON.parse(localStorage.getItem("user")).id}`} className="profileLink flex-center">
               <img src={profileIconSvg} alt="" />
             </Link>
             <Link onClick={handleLogout} className="profileLink flex-center">

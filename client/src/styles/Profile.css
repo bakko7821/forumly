@@ -5,6 +5,20 @@
     display: flex;
     align-items: start;
     justify-content: center;
+    overflow-y: auto;
+}
+
+.userProfileContentBox::-webkit-scrollbar {
+  width: 4px;               /* ширина scrollbar */
+}
+
+.userProfileContentBox::-webkit-scrollbar-track {
+  background: transparent;        /* цвет дорожки */
+}
+
+.userProfileContentBox::-webkit-scrollbar-thumb {
+  background-color: #115BCA;    /* цвет плашки */
+  border-radius: 20px;
 }
 
 .mainContainer .userInfoBox {

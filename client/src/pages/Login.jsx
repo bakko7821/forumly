@@ -33,7 +33,7 @@ function Login() {
 
   return (
     <div className="loginBox flex-column flex-center">
-      <p className="headingText">Войти в аккаутн</p>
+      <p className="headingText">Войти в аккаунт</p>
       <p className="descriptionText">Продолжая использовать Forumly, вы тем самым соглашаетесь соблюдать наше <a href="#">Пользовательское соглашение</a> и подтверждаете, что ознакомились с <a href="#">Политикой конфиденциальности</a></p>
       <button className="useAuthButton flex-center">
         <img src={googleLogo} alt="" />

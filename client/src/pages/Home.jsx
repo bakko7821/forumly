@@ -112,7 +112,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className="usersBox flex-center flex-column">
+        <div className="usersBox">
           <p>Популярные пользователи</p>
           <div className="usersList flex-column">
             {authors.map(user => (

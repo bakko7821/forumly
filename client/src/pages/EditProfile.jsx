@@ -144,26 +144,46 @@ function EditProfile() {
 
       <div className="editProfileBox flex-center">
         <form onSubmit={(e) => e.preventDefault()} className="infoForm flex-column">
-          <p>Имя</p>
-          <input
-            type="text"
-            value={firstname}
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-          <p>Фамилия</p>
-          <input
-            type="text"
-            value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
-          />
-          <p>Имя пользователя</p>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </form>
+          {/* FirstName */}
+          <div className="floating-input">
+            <input
+              type="text"
+              id="firsnate"
+              name="firsnate"
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              placeholder="Имя"
+              required
+            />
+            <label htmlFor="firstname">Имя</label>
+          </div>
+          {/* LastName */}
+          <div className="floating-input">
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              placeholder="Пароль"
+              required
+            />
+            <label htmlFor="lastname">Фамилия</label>
+          </div>
 
+          <div className="floating-input">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Имя пользователя"
+              required
+            />
+            <label htmlFor="username">Имя пользователя</label>
+          </div>
+        </form>
         <form className="avatarForm" onSubmit={(e) => e.preventDefault()}>
           {avatarPreview ? (
             <img src={avatarPreview} alt="avatar" className="userAvatar" />

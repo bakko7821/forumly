@@ -236,7 +236,7 @@ function Post() {
           {/* список комментариев */}
           <div className="commentsList flex-column">
             {comments.length === 0 ? (
-              <p className="noCommentsText">Комментариев пока нет</p>
+              <p className="noCommentsText">Комментариев пока нет. Оставьте след в истории!</p>
             ) : (
               comments.map((comment) => (
                 <div key={comment._id} className="commentItem flex-column">

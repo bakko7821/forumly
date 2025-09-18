@@ -45,9 +45,11 @@
 
 .postCard {
     width: 100%;
-    padding: 16px 8px;
-    border-top: 2px #EEF1F3 solid;
-    border-bottom: 2px #EEF1F3 solid;
+    padding: 16px;
+    background-color: #181C1F;
+    border-radius: 32px;
+    /* border-top: 2px #EEF1F3 solid;
+    border-bottom: 2px #EEF1F3 solid; */
     gap: 16px;
 }
 
@@ -126,7 +128,7 @@
 .usersBox {
     padding: 24px 16px;
     gap: 16px;
-    background-color: #2A3236;
+    background-color: #181C1F;
     border-radius: 16px;
     white-space: nowrap;
 }
@@ -148,6 +150,13 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.usersList .userCard:hover {
+    background-color: #26292c;
+    transition: background-color 0.3s;
 }
 
 .usersList .userCard .userAvatar {

@@ -140,3 +140,13 @@
     font-weight: 500;
 }
 
+.editProfileButton {
+    background-color: transparent;
+    border: 2px #2A3236 solid;
+    transition: background-color 0.3s;
+}
+
+.editProfileButton:hover {
+    transition: background-color 0.3s;
+    background-color: #2A3236;
+}

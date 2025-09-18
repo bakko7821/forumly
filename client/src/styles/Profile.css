@@ -133,7 +133,7 @@
     background-color: #6595dd;
 }
 
-.noPostsMessage {
+.noPostsMessage, .noCommentsText {
     font-size: 1.5rem;
     color: #818181;
     line-height: 1.3;

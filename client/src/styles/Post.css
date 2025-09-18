@@ -1,9 +1,25 @@
 .postPage {
+    flex: 1 1 auto;
+    height: 100%;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: start;
     gap: 24px;
+}
+
+.postPage::-webkit-scrollbar {
+  width: 4px;               /* ширина scrollbar */
+}
+
+.postPage::-webkit-scrollbar-track {
+  background: transparent;        /* цвет дорожки */
+}
+
+.postPage::-webkit-scrollbar-thumb {
+  background-color: #115BCA;    /* цвет плашки */
+  border-radius: 20px;
 }
 
 .postPage .postContent {
@@ -75,6 +91,16 @@
     line-height: 1.5;
 }
 
+.postInfoBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    padding: 8px;
+    gap: 8px;
+    border-top: 2px #115BCA solid;
+}
+
 .postComments {
     width: 100%;
     padding: 8px;
@@ -89,18 +115,65 @@
     line-height: 1.3;
 }
 
-.postComments .sendCommentForm {
-    display: flex;
-    align-items: center;
-    justify-content: start;
+.sendCommentForm {
     position: relative;
-} 
+    padding: 16px;
+    width: 100%;
+    border-radius: 32px;
+    background-color: #181C1F;
+}
 
-.postComments .sendCommentForm button {
+.sendCommentForm button {
     position: absolute;
-    right: 8px;
+    right: 24px;
+    background-color: transparent;
+    width: auto;
+    height: auto;
     margin: 0;
-    width: 40px;
-    height: 40px;
-    /* background-color: transparent; */
+}
+
+.commentsList {
+    gap: 8px;
+}
+
+.commentsList .commentItem {
+    align-items: start;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 32px;
+    background-color: #181C1F;
+}
+
+.commentsList .commentItem .commentUser {
+    gap: 8px;
+    padding: 8px;
+}
+
+.commentsList .commentItem .commentUser .circle {
+    width: 4px;
+    height: 4px;
+    background-color: #818181;
+    border-radius: 100%;
+}
+
+.commentsList .commentItem .commentUser .usernameText {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: #EEF1F3;
+    font-weight: 500;
+}
+
+.commentsList .commentItem .commentUser .commentDate {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: #818181;
+    font-weight: 400;
+}
+
+.commentsList .commentItem .commentText {
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #EEF1F3;
+    line-height: 1.5;
 }

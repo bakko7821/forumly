@@ -6,6 +6,9 @@ import "../styles/Post.css";
 import arrowBackSvg from "../assets/images/arrow-back.svg";
 import moreSvg from "../assets/images/more.svg";
 import sendSvg from "../assets/images/send.svg";
+import likeSvg from "../assets/images/like.svg";
+import starSvg from "../assets/images/star.svg";
+import shareSvg from "../assets/images/share.svg";
 
 function Post() {
   const { id } = useParams();
@@ -195,12 +198,24 @@ function Post() {
           <p className="postTitle">{post.title}</p>
           <p className="postText">{post.text}</p>
         </div>
-
+        <div className="postInfoBox">
+          <button className="likesBox">
+            <img src={likeSvg} alt="" />
+            {post.likes}
+          </button>
+          <button className="starButton">
+            <img src={starSvg} alt="" />
+          </button>
+          <button className="shareButton">
+            <img src={shareSvg} alt="" />
+            Поделиться
+          </button>
+        </div>
         <div className="postComments flex-column">
           <p className="boxName">Комментарии</p>
 
           {/* форма для комментариев */}
-          <form onSubmit={handleCommentSubmit} className="flex-between">
+          <form onSubmit={handleCommentSubmit} className="sendCommentForm flex-center">
             <div className="floating-input">
               <input
                 type="text"
@@ -211,9 +226,9 @@ function Post() {
                 placeholder="Оставьте комментарий..."
                 required
               />
-              <label htmlFor="comment">Комментарий</label>
+              <label htmlFor="comment">Оставить комментарий</label>
             </div>
-            <button type="submit">
+            <button type="submit" className="sendCommentButton flex-center">
               <img src={sendSvg} alt="Отправить" />
             </button>
           </form>
@@ -221,28 +236,27 @@ function Post() {
           {/* список комментариев */}
           <div className="commentsList flex-column">
             {comments.length === 0 ? (
-              <p>Комментариев пока нет</p>
+              <p className="noCommentsText">Комментариев пока нет</p>
             ) : (
-              comments.map((c) => (
-                <div key={c._id} className="commentItem flex-column">
+              comments.map((comment) => (
+                <div key={comment._id} className="commentItem flex-column">
                   <div className="commentUser flex-center">
-                    {c.userId?.image ? (
+                    {comment.userId?.image ? (
                       <img
                         className="userAvatar"
-                        src={`http://localhost:5000${c.userId.image}`}
+                        src={`http://localhost:5000${comment.userId.image}`}
                         alt="avatar"
                       />
                     ) : (
                       <div className="userAvatar flex-center">
-                        <p>{c.userId?.username?.charAt(0) || "?"}</p>
+                        <p>{comment.userId?.username?.charAt(0) || "?"}</p>
                       </div>
                     )}
-                    <p className="username">{c.userId?.username || "Аноним"}</p>
-                    <span className="commentDate">
-                      {new Date(c.createdAt).toLocaleDateString("ru-RU")}
-                    </span>
+                    <p className="usernameText">{comment.userId?.username || "Аноним"}</p>
+                    <div className="circle"></div>
+                    <p className="commentDate">{formatRenderDate(comment.createdAt)}</p>
                   </div>
-                  <p className="commentText">{c.text}</p>
+                  <p className="commentText">{comment.text}</p>
                 </div>
               ))
             )}

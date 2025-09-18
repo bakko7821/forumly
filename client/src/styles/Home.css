@@ -71,7 +71,7 @@
 }
 
 .postCard .postHeadingInfo .userInfo .userName {
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vh, 1rem);
     font-weight: 500;
     line-height: 1.5;
 }
@@ -99,7 +99,7 @@
     -webkit-line-clamp: 2;       /* ограничиваем до 2 строк */
     overflow: hidden;            /* скрываем лишнее */
     text-overflow: ellipsis;  
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2vh, 2rem);
     color: #EEF1F3;
     font-weight: 500;
     line-height: 1.3;
@@ -120,7 +120,7 @@
     gap: 8px;
     background-color: #2A3236;
     color: #fff ;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vh, 1rem);
     line-height: 1.5;
     font-weight: 500;
 }
@@ -157,7 +157,7 @@
 .usersBox p {
     width: 100%;
     color: #EEF1F3;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 2vh, 1.5rem);
     line-height: 1.3;
     font-weight: 500;
 }
@@ -198,14 +198,14 @@
 
 .usersList .userCard .userInfo .userName{
     font-weight: 500;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vh, 1rem);
     line-height: 1.5;
     color: #EEF1F3;
 }
 
 .usersList .userCard .userInfo .userFollowersCount{
     font-weight: 400;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vh, 1rem);
     line-height: 1.5;
     color: #818181;
 }

@@ -8,7 +8,7 @@
 
 .createPostPage p {
     color: #EEF1F3;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2vh, 2rem);
     line-height: 1.2;
     font-weight: 500;
 }

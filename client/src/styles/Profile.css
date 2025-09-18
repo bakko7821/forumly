@@ -133,3 +133,10 @@
     background-color: #6595dd;
 }
 
+.noPostsMessage {
+    font-size: 1.5rem;
+    color: #818181;
+    line-height: 1.3;
+    font-weight: 500;
+}
+

@@ -61,9 +61,6 @@ function Home() {
 
   return (
     <div className="homePage flex-ceneter flex-column">
-      <div className="cardBoxPosts flex-center">
-
-      </div>
       <div className="infoBox">
         <div className="postsList flex-column">
           {posts.map((post) => (

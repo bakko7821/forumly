@@ -33,8 +33,8 @@ function Login() {
 
   return (
     <div className="loginBox flex-column flex-center">
-      <p className="headingText">Войти</p>
-      <p className="descriptionText">Продолжая использовать Reddit, вы тем самым соглашаетесь соблюдать наше <a href="#">Пользовательское соглашение</a> и подтверждаете, что ознакомились с <a href="#">Политикой конфиденциальности</a></p>
+      <p className="headingText">Войти в аккаутн</p>
+      <p className="descriptionText">Продолжая использовать Forumly, вы тем самым соглашаетесь соблюдать наше <a href="#">Пользовательское соглашение</a> и подтверждаете, что ознакомились с <a href="#">Политикой конфиденциальности</a></p>
       <button className="useAuthButton flex-center">
         <img src={googleLogo} alt="" />
         Вход с аккаунтом Google
@@ -49,27 +49,42 @@ function Login() {
         <span></span>
       </div>
       <form onSubmit={handleSubmit} className="flex-column flex-center">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Пароль"
-          value={form.password}
-          onChange={handleChange}
-        />
-        <div className="linkBox flex-column">
-            <Link to="/register">Забыли пароль?</Link>
-            <p className="registrationPageText">Новичок на форуме? <Link to="/register">Зарегистрироваться</Link></p>
+        {/* Email */}
+        <div className="floating-input">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Электронная почта"
+            required
+          />
+          <label htmlFor="email">Электронная почта</label>
         </div>
-        <button type="submit" className="">
-          Войти
-        </button>
+
+        {/* Password */}
+        <div className="floating-input">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Пароль"
+            required
+          />
+          <label htmlFor="password">Пароль</label>
+        </div>
+
+        <div className="linkBox flex-column">
+          <Link to="/register">Забыли пароль?</Link>
+          <p className="registrationPageText">
+            Новичок на форуме? <Link to="/register">Зарегистрироваться</Link>
+          </p>
+        </div>
+
+        <button type="submit">Войти</button>
       </form>
       {message && <div className="notificationMessage flex-center">
               <img src={doneSvg} alt="" />

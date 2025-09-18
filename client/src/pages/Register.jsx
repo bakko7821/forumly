@@ -47,53 +47,77 @@ function Register() {
       </div>
       <form onSubmit={handleSubmit} className="flex-column flex-center">
         <div className="fullNameBox flex-center">
+          <div className="floating-input">
           <input
-          type="text"
-          name="firstname"
-          placeholder="Имя"
-          value={form.firstname}
-          onChange={handleChange}
-          className="border p-2 rounded"
+            type="firstname"
+            id="firstname"
+            name="firstname"
+            value={form.firstname}
+            onChange={handleChange}
+            placeholder="Имя"
+            required
           />
-          <input
-          type="text"
-          name="lastname"
-          placeholder="Фамилия"
-          value={form.lastname}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          />
+          <label htmlFor="firstname">Имя</label>
         </div>
-        <input
-          type="text"
-          name="username"
-          placeholder="Имя пользователя"
-          value={form.username}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Пароль"
-          value={form.password}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        />
+        <div className="floating-input">
+          <input
+            type="lastname"
+            id="lastname"
+            name="lastname"
+            value={form.lastname}
+            onChange={handleChange}
+            placeholder="Фамилия"
+            required
+          />
+          <label htmlFor="lastname">Фамилия</label>
+        </div>
+        </div>
+        {/* Username */}
+        <div className="floating-input">
+          <input
+            type="username"
+            id="username"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            placeholder="@Имя пользователя"
+            required
+          />
+          <label htmlFor="username">@Имя пользователя</label>
+        </div>
+        {/* Email */}
+        <div className="floating-input">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="Электронная почта"
+            required
+          />
+          <label htmlFor="email">Электронная почта</label>
+        </div>
+
+        {/* Password */}
+        <div className="floating-input">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Пароль"
+            required
+          />
+          <label htmlFor="password">Пароль</label>
+        </div>
+
         <div className="linkBox flex-column">
             <p className="registrationPageText">Уже есть аккаунт? <Link to="/login">Войти в аккаунт</Link></p>
         </div>
-        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
-          Зарегистрироваться
-        </button>
+
+        <button type="submit">Зарегистрироваться</button>
       </form>
       {message && <div className="notificationMessage flex-center">
         <img src={doneSvg} alt="" />

@@ -70,24 +70,6 @@ form .fullNameBox {
     gap: 16px;
 }
 
-form input {
-    width: 100%;
-    background-color: #2A3236;
-    padding: 16px;
-    font-size: 1rem;
-    line-height: 1.125;
-    color: #879EA8;
-    border: none;
-    outline: none;
-    border-radius: 16px;
-}
-
-form input::placeholder {
-    font-size: 1rem;
-    line-height: 1.125;
-    color: #879EA8;
-}
-
 form .linkBox {
     font-size: 1rem;
     line-height: 1.125;
@@ -132,4 +114,62 @@ form button:hover {
 
 .notificationMessage img {
     width: 64px;
+}
+
+.floating-input {
+  position: relative;
+  width: 100%;
+}
+
+/* Сам инпут */
+.floating-input input, .floating-input textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 2px #2A3236 solid;
+  padding: 16px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #EEF1F3;
+  outline: none;
+  border-radius: 16px;
+}
+
+/* Прячем placeholder, чтобы не мешался */
+.floating-input input::placeholder, .floating-input textarea::placeholder {
+  color: transparent;
+}
+
+/* Лейбл */
+.floating-input label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #879EA8;
+  pointer-events: none;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: 0.2s ease all;
+}
+
+/* Когда поле пустое — label внутри */
+.floating-input input:placeholder-shown + label, .floating-input textarea:placeholder-shown + label {
+  top: 16px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #879EA8;
+}
+
+/* Когда фокус или есть текст — label наверху */
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label,
+.floating-input textarea:focus + label,
+.floating-input textarea:not(:placeholder-shown) +label {
+  top: -16px;
+  left: 16px;
+  padding: 8px 16px;
+  background-color: #181C1F;
+  font-size: 1rem;
+  color: #879EA8; /* синий при фокусе */
 }

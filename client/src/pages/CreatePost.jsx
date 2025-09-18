@@ -28,21 +28,34 @@ function CreatePost() {
   return (
     <div className="createPostPage flex-center flex-column">
       <p>Создать пост</p>
-      <form onSubmit={handleSubmit} className="flex-column">
-        <input
-          type="text"
-          placeholder="Название поста"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Текст поста"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          required
-        ></textarea>
-        <button type="submit">Опубликовать</button>
+      <form onSubmit={handleSubmit} className="flex-column flex-center">
+        {/* Email */}
+        <div className="floating-input">
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Название поста"
+            required
+          />
+          <label htmlFor="title">Название поста</label>
+        </div>
+
+        {/* Password */}
+        <div className="floating-input">
+          <textarea
+            id="text"
+            name="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Текст поста"
+            required
+          />
+          <label htmlFor="text">Текст поста</label>
+        </div>
+        <button type="submit">Поделиться мнением</button>
       </form>
     </div>
   );

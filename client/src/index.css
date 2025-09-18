@@ -103,5 +103,8 @@ button:hover {
   }
 }
 
+.likesBox img, .commentsBox img, .starButton img, .shareButton img {
+  width: 24px;
+}
 
 

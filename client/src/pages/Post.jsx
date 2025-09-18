@@ -11,12 +11,14 @@ function Post() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  // Загружаем сам пост
+  // Загружаем пост
   useEffect(() => {
     if (!id) {
       setError("ID поста отсутствует");
@@ -56,47 +58,97 @@ function Post() {
     fetchUser();
   }, [post]);
 
+  // Загружаем комментарии
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/comments/post/${id}`);
+        setComments(res.data);
+      } catch (err) {
+        console.error("Ошибка при загрузке комментариев:", err);
+      }
+    };
+
+    fetchComments();
+  }, [id]);
+
+  // Добавить комментарий
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user?.id) {
+        alert("Вы должны войти, чтобы оставлять комментарии");
+        return;
+      }
+
+      await axios.post("http://localhost:5000/api/comments", {
+        postId: id,
+        userId: user.id,
+        text: commentText,
+      });
+
+      setCommentText("");
+
+      // обновляем список
+      const res = await axios.get(`http://localhost:5000/api/comments/post/${id}`);
+      setComments(res.data);
+    } catch (err) {
+      console.error("Ошибка при добавлении комментария:", err);
+    }
+  };
+
+  // Кнопка "назад"
   function backButton() {
     navigate(-1);
   }
 
-  if (loading) return (
-    <svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-      <circle
-        className="path"
-        fill="none"
-        strokeWidth="6"
-        strokeLinecap="round"
-        cx="33"
-        cy="33"
-        r="30"
-      ></circle>
-    </svg>
-
-  );
-  if (error) return <p className="text-red-600">{error}</p>;
-
+  // Формат даты
   function formatRenderDate(dateString) {
-      if (!dateString) return "";
+    if (!dateString) return "";
 
-      const postDate = new Date(dateString);
-      const today = new Date();
+    const postDate = new Date(dateString);
+    const today = new Date();
 
-      // убираем время, оставляем только дату
-      const postDay = new Date(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
-      const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const postDay = new Date(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
+    const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-      const diffInMs = todayDay - postDay;
-      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    const diffInMs = todayDay - postDay;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-      if (diffInDays === 0) return "сегодня";
-      if (diffInDays === 1) return "вчера";
+    if (diffInDays === 0) return "сегодня";
+    if (diffInDays === 1) return "вчера";
 
-      return postDate.toLocaleDateString("ru-RU");
+    return postDate.toLocaleDateString("ru-RU");
   }
 
   const renderDate = formatRenderDate(post?.createdAt);
-  
+
+  if (loading)
+    return (
+      <svg
+        className="spinner"
+        width="65px"
+        height="65px"
+        viewBox="0 0 66 66"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          className="path"
+          fill="none"
+          strokeWidth="6"
+          strokeLinecap="round"
+          cx="33"
+          cy="33"
+          r="30"
+        ></circle>
+      </svg>
+    );
+
+  if (error) return <p className="text-red-600">{error}</p>;
+
   return (
     <div className="postPage">
       <button className="backButton flex-center" onClick={backButton}>
@@ -129,31 +181,72 @@ function Post() {
                 <div className="circle"></div>
                 <p className="postDate">{renderDate}</p>
               </div>
-              <p className="followersCount">{user ? user.followersCount : 0} подписчиков</p>
+              <p className="followersCount">
+                {user ? user.followersCount : 0} подписчиков
+              </p>
             </div>
           </div>
           <button className="moreButton">
             <img src={moreSvg} alt="Ещё" />
           </button>
         </div>
+
         <div className="postBody flex-column">
           <p className="postTitle">{post.title}</p>
           <p className="postText">{post.text}</p>
         </div>
-        <div className="postComments flex-column">
-            <p className="boxName">Комментарии</p>
-            <form action="submit" className="sendCommentForm">
-                <input 
-                className="sendCommentInput"
-                type="text" 
-                placeholder="Поделитесь своим мнением"/>
-                <button type="submit" className="sendCommentButton flex-center">
-                    <img src={sendSvg} alt="" />
-                </button>
-            </form>
-            <div className="commentsList">
 
+        <div className="postComments flex-column">
+          <p className="boxName">Комментарии</p>
+
+          {/* форма для комментариев */}
+          <form onSubmit={handleCommentSubmit} className="flex-between">
+            <div className="floating-input">
+              <input
+                type="text"
+                id="comment"
+                name="comment"
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                placeholder="Оставьте комментарий..."
+                required
+              />
+              <label htmlFor="comment">Комментарий</label>
             </div>
+            <button type="submit">
+              <img src={sendSvg} alt="Отправить" />
+            </button>
+          </form>
+
+          {/* список комментариев */}
+          <div className="commentsList flex-column">
+            {comments.length === 0 ? (
+              <p>Комментариев пока нет</p>
+            ) : (
+              comments.map((c) => (
+                <div key={c._id} className="commentItem flex-column">
+                  <div className="commentUser flex-center">
+                    {c.userId?.image ? (
+                      <img
+                        className="userAvatar"
+                        src={`http://localhost:5000${c.userId.image}`}
+                        alt="avatar"
+                      />
+                    ) : (
+                      <div className="userAvatar flex-center">
+                        <p>{c.userId?.username?.charAt(0) || "?"}</p>
+                      </div>
+                    )}
+                    <p className="username">{c.userId?.username || "Аноним"}</p>
+                    <span className="commentDate">
+                      {new Date(c.createdAt).toLocaleDateString("ru-RU")}
+                    </span>
+                  </div>
+                  <p className="commentText">{c.text}</p>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

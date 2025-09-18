@@ -186,7 +186,7 @@ function Profile() {
                     )}
                     <p className="userName">{user.username || "Неизвестно"}</p>
                     <div className="circle"></div>
-                    <p className="postTime">3 часа назад</p>
+                    <p className="postTime">{formatRenderDate(post.createdAt)}</p>
                   </div>
                   <button
                     className="goToPostButton"
@@ -216,7 +216,7 @@ function Profile() {
               </div>
             ))
           ) : (
-            <p>У пользователя пока нет постов.</p>
+            <p className="noPostsMessage">У пользователя пока нет постов.</p>
           )}
         </div>
       </div>

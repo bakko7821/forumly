@@ -2,7 +2,7 @@
     width: 375px;
     border-radius: 32px;
     padding: 16px;
-    border: 1px #EEF1F3 solid;
+    background-color: #181C1F;
     gap: 24px;
 }
 
@@ -15,21 +15,4 @@
 
 .createPostPage form {
     gap: 16px;
-}
-
-.createPostPage form textarea {
-    width: 100%;
-    max-width: 100%;
-    background-color: #2A3236;
-    outline: none;
-    border: none;
-    padding: 16px;
-    border-radius: 16px;
-    color: #879EA8;
-    font-size: 1rem;
-    line-height: 1.125;
-}
-
-.createPostPage form textarea::placeholder {
-    color: #879EA8;
 }

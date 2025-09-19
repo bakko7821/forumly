@@ -5,6 +5,8 @@ import axios from "axios";
 import "../styles/Profile.css";
 import editSvg from "../assets/images/edit-2-svgrepo-com.svg";
 import moreSvg from "../assets/images/more.svg";
+import followSvg from "../assets/images/follow.svg";
+import donateSvg from "../assets/images/donate.svg";
 
 function Profile() {
   const { id } = useParams();
@@ -143,7 +145,7 @@ function Profile() {
           </button>
         </div>
 
-        {user && authUser && user._id === authUser.id && (
+        {user && authUser && user._id === authUser.id ? (
           <button
             onClick={goToEditProfile}
             className="editProfileButton flex-center"
@@ -151,6 +153,22 @@ function Profile() {
             <img src={editSvg} alt="" />
             Edit profile
           </button>
+        ) : (
+          <div className="userButtonsBox">
+            <button
+              // onClick={handleFollow} // твоя функция для подписки
+              className="followButton flex-center"
+            >
+              <img src={followSvg} alt="" />
+              Follow
+            </button>
+            <button
+              // onClick={handleFollow} // твоя функция для подписки
+              className="donateButton flex-center"
+            >
+              <img src={donateSvg} alt="" />
+            </button>
+          </div>
         )}
         <div className="postsAndCommentsCountsBox flex-between">
           <div className="postsCountBox flex-column">

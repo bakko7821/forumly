@@ -9,20 +9,12 @@ import shareSvg from "../assets/images/share.svg";
 function ProfileComments() {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/comments/user/${id}`)
       .then(res => setComments(res.data))
       .catch(() => setComments([]));
-  }, [id]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users/${id}`)
-      .then((res) => setUser(res.data))
-      .catch(() => setUser(null));
   }, [id]);
 
   function goToPost(postId) {
@@ -35,17 +27,16 @@ function ProfileComments() {
             {comments.length > 0 ? comments.map(comment => (
                 <div className="commentCard flex-column" key={comment.id}>
                     <div className="headInfoBox">
-                        <div className="userInfoBox">
-                           {user ? (
-                                user.image && user.image.trim() !== "" ? (
+                           {comment.userId ? (
+                                comment.userId.image && comment.userId.image.trim() !== "" ? (
                                 <img
                                     className="userAvatar"
-                                    src={`http://localhost:5000${user.image}`}
+                                    src={`http://localhost:5000${comment.userId.image}`}
                                     alt="avatar"
                                 />
                                 ) : (
                                 <div className="userAvatar flex-center">
-                                    <p>{user.username.charAt(0)}</p>
+                                    <p>{comment.userId.username.charAt(0)}</p>
                                 </div>
                                 )
                             ) : (
@@ -53,33 +44,32 @@ function ProfileComments() {
                                 <p>?</p>
                                 </div>
                             )}
-                            <p className="userName">{user.username}</p> 
+                            <p className="userName">{comment.userId?.username || "Unknown"}</p> 
                             <div className="circle"></div>
-                            <a href="#"
+                        <a href="#"
                             onClick={(e) => {
-                                e.preventDefault(); // предотвращает добавление #
+                                e.preventDefault();
                                 goToPost(comment.postId._id);
                             }}
                             >{comment.postId.title}</a>
+                    </div>
+                    <p className="commentTitle">{comment.text}</p>
+                    <div className="buttonsBox">
+                        <div className="likesBox flex-center">
+                            <img src={likeSvg} alt="" />
+                            <p>{comment.postId.likes}</p>
                         </div>
-                        <p>{comment.text}</p>
-                        <div className="buttonsBox">
-                            <div className="likesBox flex-center">
-                                <img src={likeSvg} alt="" />
-                                <p>{comment.postId.likes}</p>
-                            </div>
-                            <div className="commentsBox flex-center">
-                                <img src={commentSvg} alt="" />
-                                <p>{comment.postId.comments}</p>
-                            </div>
-                            <button className="shareButton">
-                                <img src={shareSvg} alt="" />
-                                Share
-                            </button>
+                        <div className="commentsBox flex-center">
+                            <img src={commentSvg} alt="" />
+                            <p>{comment.postId.comments}</p>
                         </div>
+                        <button className="shareButton">
+                            <img src={shareSvg} alt="" />
+                            Share
+                        </button>
                     </div>
                 </div>
-            )) : <p>Пользователь не оставлял комментариев</p>}
+            )) : <p className="noCommentsMessage">Пользователь не оставлял комментариев</p>}
         </div>
     </div>
   );

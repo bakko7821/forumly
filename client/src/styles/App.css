@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 .contentBox {
-    width: 100vw;        /* резиновая ширина */
-    max-width: 1440px;
+    width: 100vw;
+    padding: 8px;
     font-family: "IBM Plex Sans", sans-serif;
     height: 100vh;
     gap: 16px;
@@ -10,7 +10,8 @@
 
 @media (max-width: 720px) {
     .contentBox {
-        width: 720px;
+        width: 100vw;
+        max-width: 720px;
         font-family: "IBM Plex Sans", sans-serif;
         height: 100vh;
         gap: 16px;
@@ -19,7 +20,8 @@
 
 @media (max-width: 375px) {
     .contentBox {
-        width: 375px;
+        width: 100vw;
+        max-width: 375px;
         font-family: "IBM Plex Sans", sans-serif;
         height: 100vh;
         gap: 16px;
@@ -28,17 +30,76 @@
 
 .navBox {
     width: 100%;
-    height: auto;
-    padding: 16px 8px;
-    border-bottom: 2px #115BCA solid;
+    padding: 8px;
 }
 
 .mainLogo {
     font-weight: 900;
-    color: #EEF1F3;
-    font-size: clamp(1rem, 2vh, 1.5rem);
+    color: #F46262;
+    font-size: clamp(1.5rem, 2vh, 2rem);
     line-height: 1.2;
     gap: 8px;
+}
+
+.searchBox {
+    background-color: #252433;
+    color: #818181;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+    padding: 4px 16px;
+    width: 320px;
+    border-radius: 16px;
+}
+
+.searchBox input{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #EEF1F3;
+  outline: none;
+  border-radius: 16px;
+}
+
+/* Прячем placeholder, чтобы не мешался */
+.searchBox input::placeholder{
+  color: transparent;
+}
+
+/* Лейбл */
+.searchBox .floating-inpit label {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #879EA8;
+  pointer-events: none;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: 0.2s ease all;
+}
+
+/* Когда поле пустое — label внутри */
+.searchBox input:placeholder-shown + label{
+  top: 8px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #879EA8;
+}
+
+.searchBox input:focus + label,
+.searchBox input:not(:placeholder-shown) + label {
+  top: -24px;
+  left: 8px;
+  padding: 8px 16px;
+  background-color: #252433;
+  font-size: clamp(0.8rem, 2vh, 1rem);
+  color: #879EA8; /* синий при фокусе */
 }
 
 .buttonBox {
@@ -50,19 +111,22 @@
 }
 
 .signInlink {
-    color: #EEF1F3;
-    background-color: #115BCA;
+    color: #F46262;
+    background-color: transparent;
+    border: 1px #F46262 solid;
+    text-transform: uppercase;
     border-radius: 16px;
     font-size: clamp(0.8rem, 2vh, 1rem);
-    padding: 8px;
+    padding: 8px 32px;
     line-height: 1.5;
     font-weight: 500;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.1s;
 }
 
 .signInlink:hover {
-    background-color: #6595dd;
-    transition: background-color 0.3s;
+    background-color: #F46262;
+    color: #fff;
+    transition: background-color 0.3s, color 0.1s;
 }
 
 .mainContainer {
@@ -74,15 +138,17 @@
 }
 
 .profileLink {
-    background-color: #115BCA;
+    background-color: transparent;
+    border: 1px #F46262 solid;
     padding: 8px;
     border-radius: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, border 0.1s;
 }
 
 .profileLink:hover {
-    background-color: #6595dd;
-    transition: background-color 0.3s;
+    background-color: #bd7070;
+    border: 1px #bd7070 solid;
+    transition: background-color 0.3s, border 0.1s;
 }
 
 .qrOverlay {

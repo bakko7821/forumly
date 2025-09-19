@@ -5,8 +5,8 @@ import "../styles/Home.css";
 
 import likeSvg from "../assets/images/like.svg";
 import commentSvg from "../assets/images/comment.svg";
-import starSvg from "../assets/images/star.svg";
 import shareSvg from "../assets/images/share.svg";
+import moreSvg from "../assets/images/more.svg";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -65,6 +65,7 @@ function Home() {
         <div className="postsList flex-column">
           {posts.map((post) => (
             <div key={post._id} className="postCard flex-column">
+              <span></span>
               <div className="postHeadingInfo flex-between">
                 <div className="userInfo flex-center">
                   {post.author ? (
@@ -88,7 +89,12 @@ function Home() {
                   <div className="circle"></div>
                   <p className="postTime">{formatRenderDate(post?.createdAt)}</p>
                 </div>
-                <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
+                <div className="buttonsBox flex-center">
+                  <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
+                  <button className="moreInfoButton flex-center">
+                    <img src={moreSvg} alt="" />
+                  </button>
+                </div>
               </div>
               <p className="postHeadingText">{post.title}</p>
               {/* <p>{post.text}</p> */}
@@ -101,19 +107,16 @@ function Home() {
                   <img src={commentSvg} alt="" />
                   <p>{post.comments}</p>
                 </div>
-                <button className="starButton">
-                  <img src={starSvg} alt="" />
-                </button>
                 <button className="shareButton">
                   <img src={shareSvg} alt="" />
-                  Поделиться
+                  Share
                 </button>
               </div>
             </div>
           ))}
         </div>
         <div className="usersBox">
-          <p>Популярные пользователи</p>
+          <p className="boxTitle">Popular Users</p>
           <div className="usersList flex-column">
             {authors.map(user => (
               <button onClick={() => goToUserButton(user._id)} className="userCard" key={user._id}>
@@ -136,7 +139,7 @@ function Home() {
                 )}
                 <div className="userInfo flex-column">
                   <p className="userName">{user.username}</p>
-                  <p className="userFollowersCount">{user.followersCount} подписчиков</p>
+                  <p className="userFollowersCount">{user.followersCount} followers</p>
                 </div>
               </button>
             ))}

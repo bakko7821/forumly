@@ -1,14 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import logoSvg from "../assets/images/logo.svg";
+import searchSvg from "../assets/images/search.svg";
 import profileIconSvg from "../assets/images/profile-icon.svg";
 import addPostIconSvg from "../assets/images/add_post.svg";
 import logOutIconSvg from "../assets/images/logout-svgrepo-com.svg";
 
 function Navbar() {
-  const [isAuth, setIsAuth] = useState(false);// состояние для QR-кода
+  const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,25 +21,47 @@ function Navbar() {
     setIsAuth(false);
     navigate("/login");
   };
-  
+
+  // Список страниц, где searchBox не нужен
+  const hiddenSearchRoutes = ["/login", "/register"];
+  const hideSearch = hiddenSearchRoutes.includes(location.pathname);
+
   return (
     <nav className="navBox flex-between">
       <Link to="/" className="mainLogo flex-center">
-        <img src={logoSvg} alt="На главную." />
-        forumly
+        F
       </Link>
+
+      {!hideSearch && (
+        <div className="searchBox">
+          <img src={searchSvg} alt="" />
+          <div className="floating-input">
+            <input
+              type="search"
+              id="search"
+              name="search"
+              placeholder="Search"
+              required
+            />
+            <label htmlFor="search">Search</label>
+          </div>
+        </div>
+      )}
 
       <div>
         {!isAuth ? (
-            <Link to="/login" className="signInlink">
-              Войти
-            </Link>
+          <Link to="/login" className="signInlink">
+            Sign in
+          </Link>
         ) : (
           <div className="buttonBox flex-center">
             <Link to="/createPost" className="profileLink flex-center">
               <img src={addPostIconSvg} alt="" />
             </Link>
-            <Link to={`/profile/${JSON.parse(localStorage.getItem("user")).id}`} className="profileLink flex-center">
+            <Link
+              to={`/profile/${JSON.parse(localStorage.getItem("user")).id}`}
+              className="profileLink flex-center"
+            >
               <img src={profileIconSvg} alt="" />
             </Link>
             <Link onClick={handleLogout} className="profileLink flex-center">

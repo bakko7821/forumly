@@ -4,12 +4,6 @@
     gap: 24px;
 }
 
-.cardBoxPosts {
-    width: 100%;
-    height: 10%;
-    gap: 16px;
-}
-
 .infoBox {
     display: flex;
     align-items: start;
@@ -20,7 +14,7 @@
 }
 
 .postsList {
-    flex: 1 1 auto;
+    width: 1064px;
     height: 100%;
     overflow-y: auto;
     display: flex;
@@ -39,18 +33,28 @@
 }
 
 .postsList::-webkit-scrollbar-thumb {
-  background-color: #115BCA;    /* цвет плашки */
+  background-color: #F46262;    /* цвет плашки */
   border-radius: 20px;
 }
 
 .postCard {
     width: 100%;
     padding: 16px;
-    background-color: #181C1F;
+    background-color: transparent;
     border-radius: 32px;
-    /* border-top: 2px #EEF1F3 solid;
-    border-bottom: 2px #EEF1F3 solid; */
     gap: 16px;
+    transition: backround-color 0.3s;
+}
+
+.postCard span {
+    width: 100%;
+    height: 1px;
+    background-color: #8BA2AD;
+}
+
+.postCard:hover {
+    background-color: #393849;
+    transition: backround-color 0.3s;
 }
 
 .postCard .postHeadingInfo {
@@ -83,15 +87,24 @@
     border-radius: 100%;
 }
 
+.buttonsBox {
+    gap: 8px;
+}
+
 .postCard .postHeadingInfo .goToPostButton {
-    background-color: #115BCA;
+    background-color: #F46262;
     transition: background-color 0.3s;
 }
 
 .postCard .postHeadingInfo .goToPostButton:hover {
-    background-color: #6595dd;
+    background-color: #bd7070;
     transition: background-color 0.3s;
 }
+
+.buttonsBox .moreInfoButton {
+    background-color: transparent;
+}
+
 
 .postHeadingText {
     display: -webkit-box;        /* создаём блочный контейнер */
@@ -111,18 +124,24 @@
     gap: 16px;
 }
 
-.likesBox, .commentsBox, .starButton, .shareButton {
+.likesBox, .commentsBox, .shareButton {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 16px;
     padding: 8px;
     gap: 8px;
-    background-color: #2A3236;
-    color: #fff ;
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    background-color: #252433;
+    color: #8BA2AD ;
+    font-size: clamp(0.65rem, 2vh, 0.75rem);
     line-height: 1.5;
-    font-weight: 500;
+    font-weight: 400;
+    transition: background-color 0.3s;
+}
+
+.likesBox:hover, .commentsBox:hover, .shareButton:hover {
+    background-color: #2D2C3E;
+    transition: background-color 0.3s;
 }
 
 .usersBox {
@@ -132,9 +151,19 @@
     justify-content: center;
     padding: 24px 16px;
     gap: 16px;
-    background-color: #181C1F;
+    background-color: #393849;
     border-radius: 16px;
     white-space: nowrap;
+}
+
+.usersBox .boxTitle {
+    text-transform: uppercase;
+    padding: 8px;
+    width: 100%;
+    color: #EEF1F3;
+    font-size: clamp(0.6rem, 2vh, 0.875rem);
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 @media (min-width: 721px) {
@@ -154,19 +183,6 @@
     }
 }
 
-.usersBox p {
-    width: 100%;
-    color: #EEF1F3;
-    font-size: clamp(1rem, 2vh, 1.5rem);
-    line-height: 1.3;
-    font-weight: 500;
-}
-
-.usersList {
-    width: 100%;
-    gap: 8px;
-}
-
 .usersList .userCard {
     display: flex;
     align-items: center;
@@ -176,7 +192,7 @@
 }
 
 .usersList .userCard:hover {
-    background-color: #26292c;
+    background-color: #5c5b69;
     transition: background-color 0.3s;
 }
 
@@ -184,8 +200,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     background-color: #EEF1F3;
     border-radius: 100%;
 }
@@ -198,16 +214,16 @@
 
 .usersList .userCard .userInfo .userName{
     font-weight: 500;
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: clamp(0.6rem, 2vh, 0.75rem);
     line-height: 1.5;
-    color: #EEF1F3;
+    color: #8BA2AD;
 }
 
 .usersList .userCard .userInfo .userFollowersCount{
     font-weight: 400;
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: clamp(0.6rem, 2vh, 0.75rem);
     line-height: 1.5;
-    color: #818181;
+    color: #8BA2AD;
 }
 
 .usersList .userCard .userAvatar p {

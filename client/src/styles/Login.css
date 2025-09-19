@@ -6,7 +6,7 @@
     max-width: 512px;
     min-width: 320px;
     gap: 24px;
-    background-color: #181C1F;
+    background-color: #393849;
     padding: 24px;
     border-radius: 40px;
 }
@@ -27,7 +27,7 @@
 }
 
 .loginBox .descriptionText a {
-    color: #577AD6;
+    color: #F46262;
 }
 
 .useAuthButton {
@@ -84,12 +84,12 @@ form .linkBox {
 }
 
 form .linkBox a {
-    color: #577AD6;
+    color: #F46262;
 }
 
 form button {
-    background-color: #23272A;
-    color: #575A5C;
+    background-color: #252433;
+    color: #8BA2AD;
     font-weight: 500;
     font-size: clamp(1rem, 2vh, 1.5rem);
     line-height: 1.5;
@@ -100,7 +100,7 @@ form button {
 
 form button:hover {
     transition: background-color 0.3s;
-    background-color: #3d4043;
+    background-color: #F46262;
 }
 
 .notificationMessage {
@@ -128,7 +128,7 @@ form button:hover {
 .floating-input input, .floating-input textarea {
   width: 100%;
   background-color: transparent;
-  border: 2px #2A3236 solid;
+  border: 2px #252433 solid;
   padding: 16px;
   font-size: clamp(1rem, 2vh, 1.5rem);
   line-height: 1.2;
@@ -172,7 +172,7 @@ form button:hover {
   top: -16px;
   left: 16px;
   padding: 8px 16px;
-  background-color: #181C1F;
+  background-color: #393849;
   font-size: clamp(0.8rem, 2vh, 1rem);
   color: #879EA8; /* синий при фокусе */
 }

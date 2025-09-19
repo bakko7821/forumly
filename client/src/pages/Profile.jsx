@@ -1,23 +1,42 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
-import "../styles/Profile.css";
 
+import "../styles/Profile.css";
 import editSvg from "../assets/images/edit-2-svgrepo-com.svg";
-import mailSvg from "../assets/images/mail-alt-3-svgrepo-com.svg";
-import rocketSvg from "../assets/images/rocket-svgrepo-com.svg";
-import likeSvg from "../assets/images/like.svg";
-import commentSvg from "../assets/images/comment.svg";
-import starSvg from "../assets/images/star.svg";
-import shareSvg from "../assets/images/share.svg";
+import moreSvg from "../assets/images/more.svg";
 
 function Profile() {
-  const { id } = useParams(); // <-- получаем id из URL
+  const { id } = useParams();
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const authUser = JSON.parse(localStorage.getItem("user"));
+
+  const [postsCount, setPostsCount] = useState(0);
+  const [commentsCount, setCommentsCount] = useState(0);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchCounts = async () => {
+      try {
+        // запрос постов
+        const postsRes = await axios.get(`http://localhost:5000/posts/${id}`);
+        setPostsCount(postsRes.data.length);
+
+        // запрос комментов
+        const commentsRes = await axios.get(`http://localhost:5000/api/comments/user/${id}`);
+        setCommentsCount(commentsRes.data.length);
+      } catch (err) {
+        console.error("Ошибка при получении счётчиков:", err);
+      }
+    };
+
+    fetchCounts();
+  }, [id]);
 
   useEffect(() => {
     if (!id) {
@@ -41,59 +60,15 @@ function Profile() {
     fetchUser();
   }, [id]);
 
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchUserPosts = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/posts/${id}`);
-        setPosts(res.data);
-      } catch (err) {
-        if (err.response?.status === 404) {
-          // у пользователя нет постов → просто показываем пустой список
-          setPosts([]);
-        } else {
-          console.error("Ошибка при загрузке постов пользователя:", err);
-          setError(err.response?.data?.message || "Ошибка при загрузке постов пользователя");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-
-    fetchUserPosts();
-  }, [id]);
-
-  function goToPost(postId) {
-    navigate(`/post/${postId}`);
+  function goToEditProfile() {
+    navigate("/editProfile");
   }
 
   function formatRenderDate(dateString) {
-      if (!dateString) return "";
-
-      const userDate = new Date(dateString);
-      const today = new Date();
-
-      // убираем время, оставляем только дату
-      const postDay = new Date(userDate.getFullYear(), userDate.getMonth(), userDate.getDate());
-      const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-      const diffInMs = todayDay - postDay;
-      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-
-      if (diffInDays === 0) return "Сегодня";
-      if (diffInDays === 1) return "Вчера";
-
-      return userDate.toLocaleDateString("ru-RU");
+    if (!dateString) return "";
+    const userDate = new Date(dateString);
+    return userDate.toLocaleDateString("ru-RU");
   }
-
-  function goToEditProfile() {
-    navigate(`/editProfile`);
-  }
-
-  const renderDate = formatRenderDate(user?.createdAt);
-  const authUser =  JSON.parse(localStorage.getItem("user"))
 
   if (loading)
     return (
@@ -109,118 +84,95 @@ function Profile() {
         ></circle>
       </svg>
     );
+
   if (error) return <p className="text-red-600">{error}</p>;
 
   return (
-    <div className="userProfileContentBox">
-      <div className="userInfoBox flex-column">
-        {user ? (
-                  user.image && user.image.trim() !== "" ? (
-                    <img
-                      className="userAvatar"
-                      src={`http://localhost:5000${user.image}`}
-                      alt="avatar"
-                    />
-                  ) : (
-                    <div className="userAvatar flex-center">
-                      <p>{user.username.charAt(0)}</p>
-                    </div>
-                  )
-                ) : (
-                  <div className="userAvatar flex-center">
-                    <p>?</p>
-                  </div>
-        )}
-        <div className="userInfoTextBox flex-column">
-          <div className="fullNameBox flex-center">
-            <p className="firstName">{user.firstname}</p>
-            <p className="lastName">{user.lastname}</p>
+    <>
+      <div className="topUserProfileInfoBox flex-column">
+        <div className="userProfileContentBox flex-column">
+          <div className="userInfoBox flex-center">
+            {user ? (
+              user.image && user.image.trim() !== "" ? (
+                <img
+                  className="userAvatar"
+                  src={`http://localhost:5000${user.image}`}
+                  alt="avatar"
+                />
+              ) : (
+                <div className="userAvatar flex-center">
+                  <p>{user.username.charAt(0)}</p>
+                </div>
+              )
+            ) : (
+              <div className="userAvatar flex-center">
+                <p>?</p>
+              </div>
+            )}
+
+            <div className="userInfoTextBox flex-column">
+              <p className="fullName">
+                {user.firstname} {user.lastname}
+              </p>
+              <p className="userName">@{user.username}</p>
+            </div>
           </div>
-          <div className="userNameBox flex-center">
-            <p className="userName">@{user.username}</p>
-            <div className="circlce"></div>
-            <p className="followersCount">{user.followersCount} подписчиков</p>
-          </div>
+
+          {/* Навигация */}
+          <nav className="navigationBox flex-center">
+            <button onClick={() => navigate(`/profile/${id}`)}>Overview</button>
+            <button onClick={() => navigate(`/profile/${id}/posts`)}>Posts</button>
+            <button onClick={() => navigate(`/profile/${id}/comments`)}>Comments</button>
+            {user && authUser && user._id === authUser.id && (
+              <button>History</button>
+            )}
+          </nav>
         </div>
+
+        {/* Здесь будут рендериться вложенные страницы */}
+        <div className="postsListBox flex-column">
+          <Outlet />
+        </div>
+      </div>
+
+      <div className="moreUserInfoBox flex-column">
+        <div className="headingBox flex-between">
+          <p className="userName">@{user.username}</p>
+          <button className="moreButton flex-center">
+            <img src={moreSvg} alt="" />
+          </button>
+        </div>
+
         {user && authUser && user._id === authUser.id && (
-          <button onClick={goToEditProfile} className="editProfileButton flex-center">
+          <button
+            onClick={goToEditProfile}
+            className="editProfileButton flex-center"
+          >
             <img src={editSvg} alt="" />
-            Изменить профиль
+            Edit profile
           </button>
         )}
-        <div className="secondInfoBox flex-column">
-          <div className="emailBox">
-            <img src={mailSvg} alt="" />
-            <p className="userEmail">{user.email}</p>
+        <div className="postsAndCommentsCountsBox flex-between">
+          <div className="postsCountBox flex-column">
+            <p className="countText">{postsCount}</p>
+            <p className="nameText">Posts</p>
           </div>
-          <div className="joinDateBox">
-            <img src={rocketSvg} alt="" />
-            <p className="useJoinDate">{renderDate}</p>
+          <div className="postsCountBox flex-column">
+            <p className="countText">{commentsCount}</p>
+            <div className="nameText">Comments</div>
           </div>
         </div>
-      </div>
-      <div className="postsListBox flex-column">
-        <p className="boxName">Список постов {user.username}:</p>
-        <div className="postList flex-column">
-          {posts && posts.length > 0 ? (
-            posts.map((post) => (
-              <div key={post._id} className="postCard flex-column">
-                <div className="postHeadingInfo flex-between">
-                  <div className="userInfo flex-center">
-                    {user ? (
-                      user.image && user.image.trim() !== "" ? (
-                        <img
-                          className="userAvatar"
-                          src={`http://localhost:5000${user.image}`}
-                          alt="avatar"
-                        />
-                      ) : (
-                        <div className="userAvatar flex-center">
-                          <p>{user.username.charAt(0)}</p>
-                        </div>
-                      )
-                    ) : (
-                      <div className="userAvatar flex-center">
-                        <p>?</p>
-                      </div>
-                    )}
-                    <p className="userName">{user.username || "Неизвестно"}</p>
-                    <div className="circle"></div>
-                    <p className="postTime">{formatRenderDate(post.createdAt)}</p>
-                  </div>
-                  <button
-                    className="goToPostButton"
-                    onClick={() => goToPost(post._id)}
-                  >
-                    Вступить
-                  </button>
-                </div>
-                <p className="postHeadingText">{post.title}</p>
-                <div className="postInfo">
-                  <div className="likesBox flex-center">
-                    <img src={likeSvg} alt="" />
-                    <p>{post.likes}</p>
-                  </div>
-                  <div className="commentsBox flex-center">
-                    <img src={commentSvg} alt="" />
-                    <p>{post.comments}</p>
-                  </div>
-                  <button className="starButton">
-                    <img src={starSvg} alt="" />
-                  </button>
-                  <button className="shareButton">
-                    <img src={shareSvg} alt="" />
-                    Поделиться
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="noPostsMessage">У пользователя пока нет постов.</p>
-          )}
+        <div className="createdDateCountBox flex-column">
+          <p className="countText">{formatRenderDate(user.createdAt)}</p>
+          <p className="nameText">Created At</p>
+        </div>
+
+        <div className="emailCountBox flex-column">
+          <p className="countText">{user.email}</p>
+          <p className="nameText">Email</p>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

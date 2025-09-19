@@ -7,7 +7,6 @@ import arrowBackSvg from "../assets/images/arrow-back.svg";
 import moreSvg from "../assets/images/more.svg";
 import sendSvg from "../assets/images/send.svg";
 import likeSvg from "../assets/images/like.svg";
-import starSvg from "../assets/images/star.svg";
 import shareSvg from "../assets/images/share.svg";
 
 function Post() {
@@ -202,9 +201,6 @@ function Post() {
           <button className="likesBox">
             <img src={likeSvg} alt="" />
             {post.likes}
-          </button>
-          <button className="starButton">
-            <img src={starSvg} alt="" />
           </button>
           <button className="shareButton">
             <img src={shareSvg} alt="" />

@@ -64,7 +64,7 @@ function Home() {
       <div className="infoBox">
         <div className="postsList flex-column">
           {posts.map((post) => (
-            <div key={post._id} className="postCard flex-column">
+            <div key={post._id} className="postCard flex-column" onClick={() => goToPost(post._id)}>
               <span></span>
               <div className="postHeadingInfo flex-between">
                 <div className="userInfo flex-center">
@@ -90,7 +90,7 @@ function Home() {
                   <p className="postTime">{formatRenderDate(post?.createdAt)}</p>
                 </div>
                 <div className="buttonsBox flex-center">
-                  <button className="goToPostButton" onClick={() => goToPost(post._id)}>Вступить</button>
+                  <button className="goToPostButton" onClick={() => goToPost(post._id)}>Join</button>
                   <button className="moreInfoButton flex-center">
                     <img src={moreSvg} alt="" />
                   </button>

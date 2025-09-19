@@ -19,7 +19,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsAuth(false);
-    navigate("/login");
+    navigate("/home");
   };
 
   // Список страниц, где searchBox не нужен
@@ -35,16 +35,7 @@ function Navbar() {
       {!hideSearch && (
         <div className="searchBox">
           <img src={searchSvg} alt="" />
-          <div className="floating-input">
-            <input
-              type="search"
-              id="search"
-              name="search"
-              placeholder="Search"
-              required
-            />
-            <label htmlFor="search">Search</label>
-          </div>
+          <input type="search" name="search" id="search" placeholder="Search" />
         </div>
       )}
 

@@ -144,19 +144,20 @@
     transition: background-color 0.3s;
 }
 
-.usersBox {
+.usersBox, .favoriteUsersBox, .historyBox {
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 24px 16px;
     gap: 16px;
+    width: 340px;
     background-color: #393849;
     border-radius: 16px;
     white-space: nowrap;
 }
 
-.usersBox .boxTitle {
+.usersBox .boxTitle, .favoriteUsersBox .boxTitle, .historyBox .boxTitle {
     text-transform: uppercase;
     padding: 8px;
     width: 100%;
@@ -164,6 +165,33 @@
     font-size: clamp(0.6rem, 2vh, 0.875rem);
     line-height: 1.5;
     font-weight: 500;
+}
+
+.favoriteUsersBox {
+    margin-top: 16px;
+}
+
+.historyBox .boxTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.historyBox .boxTitle button {
+    background-color: transparent;
+    color: #F46262;
+    font-size: clamp(0.6rem, 2vh, 0.875rem);
+    font-weight: 400;
+}
+
+.historyBox .historyList {
+    width: 100%;
+    gap: 8px;
+    padding: 8px;
+}
+
+.historyBox .historyList .historyPostCard {
+
 }
 
 @media (min-width: 721px) {
@@ -186,7 +214,11 @@
 .usersList .userCard {
     display: flex;
     align-items: center;
+    cursor: pointer;
     gap: 8px;
+    padding: 8px;
+    justify-content: start;
+    border-radius: 16px;
     background-color: transparent;
     transition: background-color 0.3s;
 }
@@ -206,20 +238,14 @@
     border-radius: 100%;
 }
 
-.usersList .userCard .userInfo {
-    text-align: start;
-    align-items: start;
-    justify-content: start;
-}
-
-.usersList .userCard .userInfo .userName{
+.usersList .userCard .userName{
     font-weight: 500;
     font-size: clamp(0.6rem, 2vh, 0.75rem);
     line-height: 1.5;
     color: #8BA2AD;
 }
 
-.usersList .userCard .userInfo .userFollowersCount{
+.usersList .userCard .userFollowersCount{
     font-weight: 400;
     font-size: clamp(0.6rem, 2vh, 0.75rem);
     line-height: 1.5;

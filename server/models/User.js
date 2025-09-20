@@ -9,6 +9,26 @@ const userSchema = new mongoose.Schema({
   followersCount: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
   image: { type: String, default: "" },
+
+  history: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+        required: true,
+      }
+    ],
+    default: []
+  },
+  favorite: {
+    type: [
+      {
+        userId: { type: String, required: true }, // или mongoose.Schema.Types.ObjectId, если посты в Mongo
+        date: { type: Date, default: Date.now }
+      }
+    ],
+    default: []
+  },
 });
 
 const User = mongoose.model("User", userSchema);

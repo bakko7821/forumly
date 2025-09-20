@@ -17,7 +17,7 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setIsAuth(false);
     navigate("/home");
   };

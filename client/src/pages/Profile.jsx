@@ -68,7 +68,19 @@ function Profile() {
 
   function formatRenderDate(dateString) {
     if (!dateString) return "";
+
     const userDate = new Date(dateString);
+    const today = new Date();
+
+    const postDay = new Date(userDate.getFullYear(), userDate.getMonth(), userDate.getDate());
+    const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    const diffInMs = todayDay - postDay;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    if (diffInDays === 0) return "Сегодня";
+    if (diffInDays === 1) return "Вчера";
+
     return userDate.toLocaleDateString("ru-RU");
   }
 

@@ -62,5 +62,44 @@ router.put("/:id", upload.single("avatar"), async (req, res) => {
   }
 });
 
+router.put("/:id/history", async (req, res) => {
+  try {
+    const { postId } = req.body;
+
+    if (!postId) return res.status(400).json({ message: "postId обязателен" });
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { history: postId } },
+      { new: true }
+    );
+
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
+});
+
+router.get("/:id/history", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID пользователя" });
+    }
+
+    const user = await User.findById(id).select("history"); // выбираем только history
+
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
+
+    res.json(user.history); // отдаём массив id постов
+  } catch (error) {
+    console.error("Ошибка при получении истории пользователя:", error);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
+});
 
 export default router;

@@ -102,12 +102,10 @@ function Post() {
     }
   };
 
-  // Кнопка "назад"
   function backButton() {
     navigate(-1);
   }
 
-  // Формат даты
   function formatRenderDate(dateString) {
     if (!dateString) return "";
 
@@ -127,6 +125,23 @@ function Post() {
   }
 
   const renderDate = formatRenderDate(post?.createdAt);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    if (!currentUser?.id || !id) return;
+
+    const addPostToHistory = async () => {
+      try {
+        await axios.put(`http://localhost:5000/users/${currentUser.id}/history`, {
+          postId: id,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    addPostToHistory();
+  }, [id]);
 
   if (loading)
     return (
@@ -192,7 +207,6 @@ function Post() {
             <img src={moreSvg} alt="Ещё" />
           </button>
         </div>
-
         <div className="postBody flex-column">
           <p className="postTitle">{post.title}</p>
           <p className="postText">{post.text}</p>
@@ -204,7 +218,7 @@ function Post() {
           </button>
           <button className="shareButton">
             <img src={shareSvg} alt="" />
-            Поделиться
+            Share
           </button>
         </div>
         <div className="postComments flex-column">

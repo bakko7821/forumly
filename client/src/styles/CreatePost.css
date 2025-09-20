@@ -1,18 +1,121 @@
 .createPostPage {
-    width: 375px;
-    border-radius: 32px;
-    padding: 16px;
-    background-color: #181C1F;
-    gap: 24px;
-}
-
-.createPostPage p {
-    color: #EEF1F3;
-    font-size: clamp(1.5rem, 2vh, 2rem);
-    line-height: 1.2;
-    font-weight: 500;
-}
-
-.createPostPage form {
     gap: 16px;
+    width: 400px;
+    height: auto;
+}
+
+.createPostPage .titleText {
+    color: #f2f2f2;
+    font-size: clamp(1.2rem, 2vh, 1.5rem);
+    font-weight: 500;
+    line-height: 1.3;
+    padding-left: 16px;
+}
+
+.createPostPage .buttonsBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+}
+
+.createPostPage .buttonsBox button{
+    padding: 2px 16px;
+    background-color: transparent;
+    border-radius: 0px;
+    border-bottom: 1px #F46262 solid;
+    font-size: clamp(0.6rem, 2vh, 0.875rem);
+    color: #f2f2f2;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.createPostPage .buttonsBox button:hover {
+    transition: background-color 0.3s;
+    background-color: #5c5b69;
+}
+
+
+.createPostPage form .floating-input {
+  position: relative;
+  width: 100%;
+}
+
+/* Сам инпут */
+.createPostPage form .floating-input input, .createPostPage form .floating-input textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 2px #879EA8 solid;
+  padding: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #EEF1F3;
+  outline: none;
+  border-radius: 16px;
+}
+
+/* Прячем placeholder, чтобы не мешался */
+.createPostPage form .floating-input input::placeholder, .createPostPage form .floating-input textarea::placeholder {
+  color: transparent;
+}
+
+/* Лейбл */
+.createPostPage form .floating-input label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #879EA8;
+  pointer-events: none;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: 0.2s ease all;
+}
+
+/* Когда поле пустое — label внутри */
+.createPostPage form .floating-input input:placeholder-shown + label, .createPostPage form .floating-input textarea:placeholder-shown + label {
+  top: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: #879EA8;
+}
+
+/* Когда фокус или есть текст — label наверху */
+.createPostPage form .floating-input input:focus + label,
+.createPostPage form .floating-input input:not(:placeholder-shown) + label,
+.createPostPage form .floating-input textarea:focus + label,
+.createPostPage form .floating-input textarea:not(:placeholder-shown) +label {
+  top: -16px;
+  left: 16px;
+  padding: 8px 16px;
+  background-color: #2D2C3E;
+  font-size: clamp(0.8rem, 2vh, 1rem);
+  color: #879EA8; /* синий при фокусе */
+}
+
+.createPostPage form textarea {
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 100px;
+}
+
+.postRulesBox {
+    background-color: #393849;
+    width: 340px;
+    height: 100px;
+    border-radius: 24px;
+}
+
+.avatarForm {
+    width: 100%;
+}
+
+.avatarForm .imagePreview {
+    width: 100%;
+}
+
+.avatarForm .imagePreview img {
+    width: 100%;
+    border-radius: 16px;
 }

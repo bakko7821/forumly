@@ -143,13 +143,13 @@
 }
 
 .goToPostButton {
-    background-color: #115BCA;
+    background-color: #F46262;
     transition: background-color 0.3s;
 }
 
 .goToPostButton:hover {
     transition: background-color 0.3s;
-    background-color: #6595dd;
+    background-color: #bd7070;
 }
 
 .noPostsMessage, .noCommentsMessage {

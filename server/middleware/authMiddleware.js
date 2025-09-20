@@ -1,21 +1,18 @@
 import jwt from "jsonwebtoken";
 
-const authMiddleware = (req, res, next) => {
+export default function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ message: "Нет токена" });
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Нет токена, доступ запрещён" });
-  }
-
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1]; // Bearer <token>
+  if (!token) return res.status(401).json({ message: "Нет токена" });
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // сюда попадёт { id: ... }
+    req.user = decoded; // например { id: "12345" }
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Неверный или просроченный токен" });
+    console.error("JWT ошибка:", err.message);
+    res.status(401).json({ message: "Неверный токен" });
   }
-};
-
-export default authMiddleware;
+}

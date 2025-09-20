@@ -262,7 +262,15 @@
     }
 }
 
+.usersList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+}
+
 .usersList .userCard {
+    width: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;

@@ -107,7 +107,7 @@
 .fileLabel {
   position: relative;
   cursor: pointer;
-  background-color: #2563eb; /* синий */
+  background-color: #F46262; /* синий */
   color: white;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -117,7 +117,7 @@
 }
 
 .fileLabel:hover {
-  background-color: #1d4ed8; /* темнее при наведении */
+  background-color: #bd7070; /* темнее при наведении */
 }
 
 .fileInput {

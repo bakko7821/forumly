@@ -240,7 +240,7 @@ function Home() {
             <div className="usersList">
               {authors.length > 0 ? (
                 authors.map((author) => (
-                  <div className="userCard flex-center" key={author._id} onClick={() => goToUserButton(author._id)}>
+                  <div className="userCard" key={author._id} onClick={() => goToUserButton(author._id)}>
                     {author?.image ? (
                       <img className="userAvatar" src={`http://localhost:5000${author.image}`} alt="avatar" />
                     ) : (

@@ -1,24 +1,33 @@
 import express from "express";
 import mongoose from "mongoose";
 import Post from "../models/Post.js";
+import { upload } from "../utils/multer.js";
 import authMiddleware from "../middleware/authMiddleware.js"; // JWT проверка
 
 const router = express.Router();
 
 // Создать пост
-router.post("/", authMiddleware, async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const { title, text } = req.body;
+    const { title, content } = req.body;
+    let imagePath = "";
+
+    if (req.file) {
+      imagePath = `/uploads/${req.file.filename}`;
+    }
+
     const newPost = new Post({
-      title,
-      text,
-      author: req.user.id, // берём ID из токена
+      title: title || "",
+      content: content || "",
+      image: imagePath || "",
+      author: null, // временно без авторизации
     });
 
     await newPost.save();
-    res.json(newPost);
-  } catch (err) {
-    res.status(500).json({ message: "Ошибка при создании поста" });
+    res.status(201).json(newPost);
+  } catch (error) {
+    console.error("Ошибка при создании поста:", error);
+    res.status(500).json({ message: "Ошибка сервера" });
   }
 });
 

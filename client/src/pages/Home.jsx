@@ -210,8 +210,9 @@ function Home() {
                           <p className="userName">{formatRenderDate(post.createdAt)}</p>
                         </div>
                         <p className="postTitle">{post.title}</p>
-                        <div className="statsInfoBox flex-center">
+                        <div className="statsInfoBox">
                           <p className="postLikes">{post.likes} likes</p>
+                          <div className="circle"></div>
                           <p className="postComments">{post.comments} comments</p>
                         </div>
                       </div>

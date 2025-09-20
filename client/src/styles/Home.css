@@ -187,11 +187,62 @@
 .historyBox .historyList {
     width: 100%;
     gap: 8px;
-    padding: 8px;
 }
 
 .historyBox .historyList .historyPostCard {
+    background-color: transparent;
+    padding: 8px;
+    width: 100%;
+    gap: 16px;
+    border-radius: 16px;
+    transition: background-color 0.3s;
+}
 
+.historyBox .historyList .historyPostCard:hover {
+    background-color: #5c5b69;
+    transition: background-color 0.3s;
+}
+
+.historyBox .historyList .historyPostCard  .infoPostBox {
+    width: 100%;
+    gap: 8px;
+}
+
+.historyBox .historyList .historyPostCard  .infoPostBox .userInfoBox {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+}
+
+.historyBox .historyList .historyPostCard  .infoPostBox .userInfoBox .userAvatar {
+    width: 24px;
+    height: 24px;
+}
+
+.historyBox .historyList .historyPostCard  .infoPostBox .userInfoBox .circle,
+.historyBox .historyList .historyPostCard  .infoPostBox .statsInfoBox .circle {
+    width: 4px;
+    height: 4px;
+    background-color: #8BA2AD;
+    border-radius: 100%;
+}
+
+.historyBox .historyList .historyPostCard  .infoPostBox .statsInfoBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+} 
+
+.historyBox .historyList .historyPostCard  .infoPostBox .statsInfoBox .postLikes,
+.historyBox .historyList .historyPostCard  .infoPostBox .statsInfoBox .postComments {
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #8BA2AD;
 }
 
 @media (min-width: 721px) {

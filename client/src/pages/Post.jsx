@@ -49,7 +49,7 @@ function Post() {
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/users/${post.author}`);
+        const res = await axios.get(`http://localhost:5000/users/${post.author._id}`);
         setUser(res.data);
       } catch (err) {
         console.error("Ошибка при загрузке профиля:", err);
